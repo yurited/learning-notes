@@ -14,6 +14,9 @@ Four Essential Data structure-building concepts in Swift
 - enum
 
 - protocol
+A type which is a declaration of **functionality only**
+No data storage of any kind
+Essentially provides multiple inheritance (of functionality only, not storage) in Swift
 
 ### automatic reference counting
 - reference types are stored in the heap
@@ -231,3 +234,105 @@ switch x:
 **optional chaining**
 
 `let y = x?.foo()?.bar?.z`
+
+### Protocols
+
+Protocols are a way to express an API more concisely
+The API expresses the functions or or varibles it wants the caller to provide using a protocol so a protocol is simply a collection of method and property declarations.
+
+**A protocol is a TYPE**
+
+#### 3 Aspects to a protocol
+
+- declaration which properties and methods are in the Protocols
+- a class, struct or enum declaration that makes the claim to implement the Protocol
+- the code in said class, struct or enum (or extension) the implements the protocol
+
+**Optional methods in a Protocol**
+Normally any protocol implementor must implement all the methods and properties
+but it is possible to mark some methods in a protocol `optional`
+any protocol that has optional methods must be marked `@objc`
+any class that implements an optional protocol must inherit from `NSObject`
+
+delegate usually uses `optional` method.
+
+1. declaration of protocol
+```
+protocol SomeProtocol : InheritedProtocol1, InheritedProtocol2 {
+    var someProperty: Int { get set }
+    func aMethod(arg1: Double, arg2: String) -> SomeType
+    mutating func changeIt()
+    init(arg: Type)
+}
+```
+if you want to implement `SomeProtocol` you also need to implement `InheritedProtocol1, InheritedProtocol2`
+
+You must specify whether a property is get only or both get SomeType
+mark mutating unless you restrict it to class (rarely done this way )
+
+2. declaration of implementation of protocol
+```
+class SomeClass : SuperClassOfSomeClass, SomeProtocol, AnotherProtocol {
+    required init() {
+    }
+}
+
+struct SomeStruct : SomeProtocol, AnotherProtocol {
+
+}
+
+enum SomeStruct : SomeProtocol, AnotherProtocol {
+
+}
+
+extension Something: SomeProtocol {
+
+}
+```
+
+example:
+
+```
+var thingsToMove: Movable = prius
+thingsToMove.move(to: ...)
+thingsToMove = square
+let thingsToMove: [Moveable] = [prius, square]
+
+func slide(slider: Moveable) {
+
+}
+func slideAndSlide(x: Slippery & Moveable)
+
+```
+
+#### Delegate
+1. View declares a delegation protocol
+2. The View's API has a `weak delegate` property whose type is that delegation Protocol
+3. The View uses the delegate property to get/do things it can't own or control on its known
+4. The controller declares that it implements the Protocol
+5. The controller sets delegate of the View to `self` using property in #2 above
+6. The controller implements the protocol (probably it has lots of optional methods in it)
+
+closure in swift is sometimes better solution
+
+example:
+```
+@objc protocol UIScrollViewDelegate {
+    optional func scrollViewDidScroll(scrollView: UIScrollView)
+    optional func viewForZooming(in scrollView: UIScrollView) -> UIScrollView
+    ...
+}
+// In ViewController
+class MyViewController : UIViewController, UIScrollViewDelegate { ... }
+// probably in @IBOutlet didSet for scroll view:
+scrollView.delegate = self
+```
+
+Equatable's Protocol
+```
+protocol Equatable {
+    static func ==(lhs: Self, rhs: Self) -> Bool
+}
+```
+
+人生最大的敌人是平庸
