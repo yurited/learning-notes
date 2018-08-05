@@ -335,4 +335,52 @@ protocol Equatable {
 }
 ```
 
+### Any & Any object
+
+for objective c APIs
+but not so much anymore in iOS11 since those old ObjC APIs have been updated
+but we still see it in NSAttributedString
+can't invoke any method on an `Any`
+
+**coverting**
+
+`as?`
+
+```
+let unknown: Any = ...
+if let foo = unknown as? MyType {
+    // foo is of MyType here
+}
+```
+
+you can also use as to 'downcast' superclass down to a subclass
+```
+let vc: UIViewController = ConcentrationViewController()
+if let cvc = vc as? ConcentrationViewController {
+    // do ConcentrationViewController things
+}
+
+```
+
+###
+**NSNumber**
+Generic number-holding class (i.e. reference type)
+`let n = NSNumber(35.5)` or let n: NSNumber = 35.5
+`let intified = n.intValue // also douableValue, boolValue`
+
+**Data**
+bits
+
+
+
+
+
+
+
+
+
+
+
+
+
 人生最大的敌人是平庸
