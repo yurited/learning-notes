@@ -95,3 +95,7 @@ func collectionView(_ collectionView: UICollectionView,
                     layout collectionViewLayout: UICollectionViewLayout,
                     sizeForItemAt indexPath: indexPath) -> CGSize
 ```
+
+
+### Headers
+Collection View header are also reusable
