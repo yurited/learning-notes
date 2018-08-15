@@ -81,7 +81,7 @@ UITableView's delegate can also control row heights:
 
 `func tableView(UITableView, {estimated}heightForRowAt indexPath: IndexPath) -> CFFloat`
 Beware: the non-estimated version of this could get called **a lot** if you  you have a big table.
-
+be
 
 **CollectionView**
 
