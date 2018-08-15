@@ -9,3 +9,6 @@ https://1ml.com/
 
 [Jameson Lopp](https://twitter.com/lopp)
 https://lopp.net/bitcoin.html
+
+Mining distribution, Opinitons, Legalization status
+https://coin.dance/
